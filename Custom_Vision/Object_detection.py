@@ -77,7 +77,7 @@ scissors_image_regions = {
 }
 
 # Update this with the path to where you downloaded the images.
-base_image_location = "<path to directory"
+base_image_location = "<path to directory>"
 
 # Go through the data table above and create the images
 print("Adding images...")
