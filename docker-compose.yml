@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: aionboarded
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  cms:
+    image: node:20-alpine
+    working_dir: /workspace
+    command: sh -c "echo 'Payload CMS will be configured in PR2'; sleep infinity"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
